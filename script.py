@@ -4,6 +4,7 @@ import random
 words = []
 underscores = []
 guesses = []
+end_game = False
 
 # BEFORE THE GAME STARTS
 user_input = input("Pick a level: Easy, Normal or Hard?")
@@ -17,13 +18,13 @@ if user_input == ("Easy"):
         game_input = input("Yes or No?")
 if game_input == ("Yes"):
         game_input = input("Start Game by pressing enter")
-        print("Guess a Letter")
+        user_input = input("Guess a Letter").lower()
 
     
 if game_input == ("No"):
         user_input = input("Pick a level: Easy, Normal or Hard?")
         game_input = input("Start Game by pressing enter")
-        print("Guess a Letter")
+        user_input = input("Guess a Letter").lower()
 
 # Normal
 if user_input == ("Normal"):
@@ -31,13 +32,13 @@ if user_input == ("Normal"):
         game_input = input("Yes or No?")
 if game_input == ("Yes"):
         game_input = input("Start Game by pressing enter")
-        print("Guess a Letter")
+        user_input = input("Guess a Letter").lower()
 
     
 if game_input == ("No"):
         user_input = input("Pick a level: Easy, Normal or Hard?")
         game_input = input("Start Game by pressing enter")
-        print("Guess a Letter")
+        user_input = input("Guess a Letter").lower()
 
 # Hard 
 if user_input == ("Hard"):
@@ -45,49 +46,45 @@ if user_input == ("Hard"):
         game_input = input("Yes or No?")
 if game_input == ("Yes"):
         game_input = input("Start Game by pressing enter")
-        print("Guess a Letter")
+        user_input = input("Guess a Letter").lower()
 
     
 if game_input == ("No"):
         user_input = input("Pick a level: Easy, Normal or Hard?")
         game_input = input("Start Game by pressing enter")
-        print("Guess a Letter")
+        user_input = input("Guess a Letter").lower()
 
 # GAME PULLS WORDS FROM WORD LIST 
 with open ("words.txt") as file:
     strings = file.readlines()
-    words.append(str)
-    random_word = words [7].lower()
-# # # adds an underscore to each letter of the word and asks user to "guess a letter"
-#     word_length = range(len(random_word))
-#     for num in word_length:
-#         underscores.append('_')
-#     underscores = "".join(underscores)
+
+# CONVERTING ALL THE WORDS TO STRINGS
+    for string in strings:
+        words.append(string)
+# TO GET A RANDOM WORD FROM WORDS(UPPER AND LOWERCASE)
+    random_word = words[27].lower()
+    random_word = random_word.replace("/n", "")
+    print(random_word)
+
+#  LENGTH OF A WORDS AND ADDING THE UNDERSCORES UNDERNEATH
+    word_length = range(len(random_word))
+    for num in word_length:
+        underscores.append('_')
+    underscores = "".join(underscores)
+    print(underscores)
     
-#     print(underscores)
-#     user_input = input('Guess A Letter').lower()
-# # # list comprehensions
-#     for index in range(len(random_word)):
-#         if random_word[index] == user_input:
-#             underscores = underscores[0:index] + user_input + underscores[index+1:]
-#     print('underscores', underscores)
-        
-#         random_word_list = [index+1:]
+    while game_input != "Quit" and end_game == False:
+        for index in range(len(random_word)):
+            if random_word[index] == user_input:
+                underscores = underscores[0:index] + game_input + underscores[index+1:]
+            print(underscores)
+            game_input = input("Try Agian")
+
+            if game_input == "Quit":
+                end_game = True
     
-# # generate random letter between A-Z
-# #random_letter =random.randbytes(A,Z)
-# # random_letter = str(random_letter)
 
-# # guess_count = 1
-# # user_input = input("Pick a level")
-# # game_level = ("Easy", "Normal", "Hard")
-
-# # # At the start of the game, let the user know how many letters the computer's word contains.
-
-# # # # Ask the user to supply one guess (i.e. letter) per roundThis letter can be upper or lower case and it should not matter. If a user enters more than one letter, tell them the input is invalid and let them try again.
-
-
-# # # the game asking the user if the user wants to quit or not //!CONDITIONS (YOU WON, YOU LOST, YOU QUIT, START OVER!//
+# //CONDITIONS (YOU WON, YOU LOST, YOU QUIT, START OVER!//
 # # while user_input != 'No' and game_ends == False
 # # (YOU LOST) if the player uses all of the 8 tries incorrectly, they will lose. *Game Over*
 #     if guess_count == 8;
